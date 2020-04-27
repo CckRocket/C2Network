@@ -1,0 +1,230 @@
+version: '2'
+
+services:
+
+  peer0.orgInfo1.ccnetwork.com:
+    container_name: peer0.orgInfo1.ccnetwork.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_PEER_ID=peer0.orgInfo1.ccnetwork.com
+      - CORE_PEER_LOCALMSPID=OrgInfo1MSP
+      - CORE_PEER_ADDRESS=peer0.orgInfo1.ccnetwork.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgInfo1.ccnetwork.com:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgInfo1.ccnetwork.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ccnetwork_default
+
+      - FABRIC_LOGGING_SPEC=DEBUG
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/orgInfo1.ccnetwork.com/peers/peer0.orgInfo1.ccnetwork.com/msp:/etc/hyperledger/peer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 7051:7051
+      - 7052:7052
+      - 7053:7053
+
+  peer0.orgInfo2.ccnetwork.com:
+    container_name: peer0.orgInfo2.ccnetwork.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_PEER_ID=peer0.orgInfo2.ccnetwork.com
+      - CORE_PEER_LOCALMSPID=OrgInfo2MSP
+      - CORE_PEER_ADDRESS=peer0.orgInfo2.ccnetwork.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgInfo2.ccnetwork.com:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgInfo2.ccnetwork.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ccnetwork_default
+
+      - FABRIC_LOGGING_SPEC=DEBUG
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/orgInfo2.ccnetwork.com/peers/peer0.orgInfo2.ccnetwork.com/msp:/etc/hyperledger/peer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 17051:7051
+      - 17052:7052
+      - 17053:7053
+  peer0.orgCC.ccnetwork.com:
+    container_name: peer0.orgCC.ccnetwork.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_PEER_ID=peer0.orgCC.ccnetwork.com
+      - CORE_PEER_LOCALMSPID=OrgCCMSP
+      - CORE_PEER_ADDRESS=peer0.orgCC.ccnetwork.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgCC.ccnetwork.com:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgCC.ccnetwork.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ccnetwork_default
+
+      - FABRIC_LOGGING_SPEC=DEBUG
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./crypto-config/peerOrganizations/orgCC.ccnetwork.com/peers/peer0.orgCC.ccnetwork.com/msp:/etc/hyperledger/peer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 27051:7051
+      - 27052:7052
+      - 27053:7053
+  peer0.orgSC1.ccnetwork.com:
+    container_name: peer0.orgSC1.ccnetwork.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_PEER_ID=peer0.orgSC1.ccnetwork.com
+      - CORE_PEER_LOCALMSPID=OrgSC1MSP
+      - CORE_PEER_ADDRESS=peer0.orgSC1.ccnetwork.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgSC1.ccnetwork.com:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgSC1.ccnetwork.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ccnetwork_default
+
+      - FABRIC_LOGGING_SPEC=DEBUG
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/orgSC1.ccnetwork.com/peers/peer0.orgSC1.ccnetwork.com/msp:/etc/hyperledger/peer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 37051:7051
+      - 37052:7052
+      - 37053:7053
+  peer0.orgSC2.ccnetwork.com:
+    container_name: peer0.orgSC2.ccnetwork.com
+    image: hyperledger/fabric-peer
+    environment:
+      - CORE_PEER_ID=peer0.orgSC2.ccnetwork.com
+      - CORE_PEER_LOCALMSPID=OrgSC2MSP
+      - CORE_PEER_ADDRESS=peer0.orgSC2.ccnetwork.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.orgSC2.ccnetwork.com:7051
+      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/peer/msp
+      - CORE_PEER_CHAINCODEADDRESS=peer0.orgSC2.ccnetwork.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=ccnetwork_default
+
+      - FABRIC_LOGGING_SPEC=DEBUG
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./crypto-config/peerOrganizations/orgSC2.ccnetwork.com/peers/peer0.orgSC2.ccnetwork.com/msp:/etc/hyperledger/peer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: peer node start
+    ports:
+      - 47051:7051
+      - 47052:7052
+      - 47053:7053
+  cli.orgInfo1.ccnetwork.com:
+    container_name: cli.orgInfo1.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cli.orgInfo1.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgInfo1.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgInfo1MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgInfo1.ccnetwork.com/users/Admin@orgInfo1.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+        - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgInfo1.ccnetwork.com
+  cli.orgInfo2.ccnetwork.com:
+    container_name: cli.orgInfo2.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cli.orgInfo2.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgInfo2.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgInfo2MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgInfo2.ccnetwork.com/users/Admin@orgInfo2.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgInfo2.ccnetwork.com
+  cli.orgCC.ccnetwork.com:
+    container_name: cli.orgCC.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cli.orgCC.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgCC.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgCCMSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgCC.ccnetwork.com/users/Admin@orgCC.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgCC.ccnetwork.com
+  cli.orgSC1.ccnetwork.com:
+    container_name: cli.orgSC1.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cli.orgSC1.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC1.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC1MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC1.ccnetwork.com/users/Admin@orgSC1.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC1.ccnetwork.com
+  cli.orgSC2.ccnetwork.com:
+    container_name: cli.orgSC2.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cli.orgSC2.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC2.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC2MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC2.ccnetwork.com/users/Admin@orgSC2.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC2.ccnetwork.com

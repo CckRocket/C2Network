@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  orderer.imocc.com:
+    container_name: orderer0.ccnetwork.com
+    image: hyperledger/fabric-orderer
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric
+    command: orderer
+    ports:
+      - 7050:7050 # 17050:7050
+    volumes:
+        - ./config/genesis.block:/var/hyperledger/orderer/genesis.block
+        - ./crypto-config/ordererOrganizations/ccnetwork.com/orderers/orderer0.ccnetwork.com/msp:/var/hyperledger/orderer/msp
+        #- ./crypto-config/ordererOrganizations/ccnetwork.com/orderers/orderer0.ccnetwork.com/tls/:/var/hyperledger/orderer/tls
