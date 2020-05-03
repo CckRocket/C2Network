@@ -147,7 +147,7 @@ services:
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
         - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
     depends_on:
-      - peer0.orgInfo1.ccnetwork.com
+      - peer0.orgInfo1.ccnetwork.com作战平台通道
   cli.orgInfo2.ccnetwork.com:
     container_name: cli.orgInfo2.ccnetwork.com
     image: hyperledger/fabric-tools
@@ -208,6 +208,46 @@ services:
       - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
     depends_on:
       - peer0.orgSC1.ccnetwork.com
+  cliBattle1.orgSC1.ccnetwork.com:
+    container_name: cliBattle1.orgSC1.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cliBattle1.orgSC1.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC1.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC1MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC1.ccnetwork.com/users/Admin@orgSC1.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC1.ccnetwork.com
+  cliBattle2.orgSC1.ccnetwork.com:
+    container_name: cliBattle2.orgSC1.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cliBattle2.orgSC1.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC1.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC1MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC1.ccnetwork.com/users/Admin@orgSC1.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC1.ccnetwork.com
   cli.orgSC2.ccnetwork.com:
     container_name: cli.orgSC2.ccnetwork.com
     image: hyperledger/fabric-tools
@@ -217,6 +257,46 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - FABRIC_LOGGING_SPEC=DEBUG
       - CORE_PEER_ID=cli.orgSC2.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC2.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC2MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC2.ccnetwork.com/users/Admin@orgSC2.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC2.ccnetwork.com
+  cliBattle3.orgSC2.ccnetwork.com:
+    container_name: cliBattle3.orgSC2.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cliBattle3.orgSC2.ccnetwork.com
+      - CORE_PEER_ADDRESS=peer0.orgSC2.ccnetwork.com:7051
+      - CORE_PEER_LOCALMSPID=OrgSC2MSP
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC2.ccnetwork.com/users/Admin@orgSC2.ccnetwork.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    volumes:
+      - /var/run/:/host/var/run/
+      - ./chaincode/go:/opt/gopath/src/github.com/hyperledger/fabric/ccnetwork/chaincode/go #chaincode injection
+      - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
+      - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
+    depends_on:
+      - peer0.orgSC2.ccnetwork.com
+  cliBattle4.orgSC2.ccnetwork.com:
+    container_name: cliBattle4.orgSC2.ccnetwork.com
+    image: hyperledger/fabric-tools
+    tty: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - CORE_PEER_ID=cliBattle4.orgSC2.ccnetwork.com
       - CORE_PEER_ADDRESS=peer0.orgSC2.ccnetwork.com:7051
       - CORE_PEER_LOCALMSPID=OrgSC2MSP
       - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/peerOrganizations/orgSC2.ccnetwork.com/users/Admin@orgSC2.ccnetwork.com/msp
