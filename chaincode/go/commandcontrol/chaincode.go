@@ -37,14 +37,20 @@
 		 return setCommand(stub, args)
 	 case "getCommand":
 		 return getCommand(stub, args)
+	 case "deleteCommand":
+	 	return deleteCommand(stub,args)
 	 case "setInfo":
 		 return setInfo(stub, args)
 	 case "getInfo":
 		 return getInfo(stub, args)
+	 case "deleteInfo":
+	 	return deleteInfo(stub, args)
 	 case "setWeaponState":
 		 return setWeaponState(stub, args)
 	 case "getWeaponState":
 		 return getWeaponState(stub, args)
+	 case "deleteWeaponState":
+		 return deleteWeaponState(stub,args)
 	 default:
 		 return shim.Error(fmt.Sprintf("unsupported function: %s", funcName))
 	 }
@@ -124,6 +130,31 @@
 	 }
 	 return shim.Success(commandBytes)
  }
+ func deleteCommand(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	 //check the number of args
+	 if len(args) != 2 {
+		 return shim.Error("not enough args for deleteCommand request")
+	 }
+
+	 //validation of args
+	 name := args[0]
+	 id := args[1]
+	 if name == "" || id == "" {
+		 return shim.Error("invalid null args")
+	 }
+
+	 //get data from blockchain
+	 commandBytes, err := stub.GetState(constructCommandKey(name,id))
+	 if err != nil || len(commandBytes) == 0 {
+		 return shim.Error("command not found")
+	 }
+	 err = stub.DelState(constructCommandKey(name,id))
+	 if err != nil {
+	 	return shim.Error(fmt.Sprintf("delete command error: %s",err))
+	 }
+	 return shim.Success(nil)
+ }
+
 
  //type Info struct {
 	// Name string `json:"name"`
@@ -196,6 +227,30 @@
 	 }
 	 return shim.Success(infoBytes)
  }
+ func deleteInfo(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	 //check the number of args
+	 if len(args) != 2 {
+		 return shim.Error("not enough args for deleteInfo request")
+	 }
+
+	 //validation of args
+	 name := args[0]
+	 id := args[1]
+	 if name == "" || id == "" {
+		 return shim.Error("invalid null args for info name or id")
+	 }
+
+	 //get data from blockchain
+	 infoBytes, err := stub.GetState(constructInfoKey(name,id))
+	 if err != nil || len(infoBytes) == 0 {
+		 return shim.Error("info not found!")
+	 }
+	 err = stub.DelState(constructInfoKey(name,id))
+	 if err != nil {
+	 	return shim.Error(fmt.Sprintf("delete info error: %s", err))
+	 }
+	 return shim.Success(nil)
+ }
  //type WeaponState struct {
 	// Name string `json:"name"`
 	// Id   string `json:"id"`
@@ -254,6 +309,31 @@
 	 weaponStateBytes, err := stub.GetState(constructWeaponStateKey(name,id))
 	 if err != nil || len(weaponStateBytes) == 0 {
 		 return shim.Error("weaponState not found")
+	 }
+	 return shim.Success(weaponStateBytes)
+ }
+
+ func deleteWeaponState(stub shim.ChaincodeStubInterface, args []string) pb.Response {
+	 //check the number of args
+	 if len(args) != 2 {
+		 return shim.Error("not enough args for deleteWeaponState request")
+	 }
+
+	 //validation of args
+	 name := args[0]
+	 id := args[1]
+	 if name == "" || id == "" {
+		 return shim.Error("empty variable for weapon name or id")
+	 }
+
+	 //get data from blockchain
+	 weaponStateBytes, err := stub.GetState(constructWeaponStateKey(name,id))
+	 if err != nil || len(weaponStateBytes) == 0 {
+		 return shim.Error("weaponState not found")
+	 }
+	 err = stub.DelState(constructWeaponStateKey(name,id))
+	 if err != nil {
+	 	return shim.Error(fmt.Sprintf("delete weapon state error: %s",err))
 	 }
 	 return shim.Success(weaponStateBytes)
  }
