@@ -147,7 +147,7 @@ services:
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer
         - ./config:/opt/gopath/src/github.com/hyperledger/fabric/peer/config
     depends_on:
-      - peer0.orgInfo1.ccnetwork.com作战平台通道
+      - peer0.orgInfo1.ccnetwork.com
   cli.orgInfo2.ccnetwork.com:
     container_name: cli.orgInfo2.ccnetwork.com
     image: hyperledger/fabric-tools
